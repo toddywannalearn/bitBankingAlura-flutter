@@ -1,18 +1,20 @@
-import 'package:bitbanking/Transferencia.dart';
+import 'package:bitbanking/model/Transferencia.dart';
 import 'package:flutter/material.dart';
-import 'widgets/Editor.dart';
-import 'widgets/ContainerQtd.dart';
+import '../widgets/Editor.dart';
 
-class TransfScreen extends StatelessWidget {
+class TransfScreen extends StatefulWidget {
+  @override
+  _TransfScreenState createState() => _TransfScreenState();
+}
+
+class _TransfScreenState extends State<TransfScreen> {
   final TextEditingController _controllerCampoConta = TextEditingController();
   final TextEditingController _controllerCampoValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green.shade700,
           title: Text('Formulário'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
@@ -44,8 +46,7 @@ class TransfScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   void _criaTransferencia(BuildContext context) {
@@ -61,28 +62,4 @@ class TransfScreen extends StatelessWidget {
       debugPrint('A conta ou valor não devem ser nulos');
     }
   }
-
-//  Widget btnConfirmar() {
-//    return RaisedButton(
-//      color: Colors.blueAccent,
-//      child: Text(
-//        'Confirmar',
-//        style: TextStyle(
-//          color: Colors.white,
-//        ),
-//      ),
-//      onPressed: () {
-//        int conta = int.tryParse(_controllerCampoConta.text);
-//        double valor = double.tryParse(_controllerCampoValor.text);
-//        if (conta != null && valor != null) {
-//          final transferenciaCriada = Transferencia(conta, valor);
-//          debugPrint(transferenciaCriada.toString());
-//          debugPrint('criando transferencia');
-//          Navigator.pop(context, transferenciaCriada);
-//        } else {
-//          debugPrint('A conta ou valor não devem ser nulos');
-//        }
-//      },
-//    );
-//  }
 }
