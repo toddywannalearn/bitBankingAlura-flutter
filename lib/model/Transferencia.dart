@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-class Transferencia{
+class Transferencia {
   final int conta;
   final double valor;
 

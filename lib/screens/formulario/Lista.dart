@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'transferenciaScreen.dart';
-import '../model/Transferencia.dart';
+import 'Formulario.dart';
+import '../../model/Transferencia.dart';
 
-class HomeScreen extends StatefulWidget {
+class ListaTransferencia extends StatefulWidget {
   final List<Transferencia> _transferencias = [];
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ListaTransferenciaState createState() => _ListaTransferenciaState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ListaTransferenciaState extends State<ListaTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Transferências'),
       ),
       body: widget._transferencias.length == 0
@@ -60,22 +61,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        final Future<Transferencia> future = Navigator.push(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (BuildContext context) => TransfScreen()),
-        );
-        future.then((transferenciaRecebida) {
-          Future.delayed(Duration(seconds: 2), () {
-            debugPrint('chegou no then do future');
-            debugPrint('$transferenciaRecebida');
-            if (transferenciaRecebida != null) {
-              setState(() {
-                widget._transferencias.add(transferenciaRecebida);
-              });
-            }
-          });
+          MaterialPageRoute(
+              builder: (BuildContext context) => FormularioTransferencia()),
+        ).then((transferenciaRecebida) {
+          _atualizaLista(transferenciaRecebida);
         });
       },
     );
+  }
+
+  void _atualizaLista(dynamic transferenciaRecebida){
+    if (transferenciaRecebida != null) {
+      setState(() {
+        widget._transferencias.add(transferenciaRecebida);
+      });
+    }
   }
 }
